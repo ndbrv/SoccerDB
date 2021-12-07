@@ -1,2 +1,8 @@
-package com.example.springtemplate.models;public enum Position {
+package com.example.springtemplate.models;
+
+public enum Position {
+  Forward,
+  Midfielder,
+  Defender,
+  Goalkeeper;
 }

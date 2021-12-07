@@ -1,34 +1,35 @@
-const {Link, useHistory} = window.ReactRouterDOM;
-import userService from "./user-service"
+import React from "react";
+import playerService from "./player-service";
+import ReactDOM, {Link, Router} from 'react-router-dom';
 const { useState, useEffect } = React;
 
 const PlayerList = () => {
-    const history = useHistory();
     const [players, setPlayers] = useState([])
     useEffect(() => {
-        findAllPlayers()
-    }, [])
-    const findAllPlayers = () =>
-        userService.findAllPlayers()
+        playerService.findAllPlayers()
             .then(players => setPlayers(players))
+    }, [])
+
+
 
     return(
         <div>
             <h2>Player List</h2>
-            <button onClick={() => history.push("/users/new")}>
-                Add User
-            </button>
+            <Link to="/players/new">
+                Create New Player
+            </Link>
             <ul className="list-group">
                 {players.map(player =>
                                <li key={player.id}>
                                    <Link to={`/players/${player.id}`}>
                                        {player.firstName},
                                        {player.lastName},
-                                       {player.username}
+                                       {player.username},
+                                       {player.email},
+                                       {player.position}
                                    </Link>
                                </li>)
                 }
-
             </ul>
         </div>
     )
