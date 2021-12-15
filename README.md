@@ -38,4 +38,11 @@ League:
 The other domain object that is part of the app is the league. A league holds information about the league name, what country it is in, at what tier the league is, and how much the league is worth. A league can have many teams participating in it. The app lists the all the leagues and allows for the updating, deletion, and creation of new leagues.
 
 
+--------------------------------------------------------------------------------------------------------------------------
+
+The backend of the project is in the directory src/main/java/com/example/springtemplate/
+
+The front end of the project is in the directory src/main/webapp/react/soccer_react/soccerapp
+
+
 
