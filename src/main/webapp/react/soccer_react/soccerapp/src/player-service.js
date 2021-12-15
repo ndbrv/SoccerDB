@@ -13,6 +13,10 @@ export const findPlayerById = (id) =>
     fetch(`${PLAYERS_URL}/${id}`)
         .then(response => response.json())
 
+export const findPlayerTeamById = (id) =>
+    fetch(`${PLAYERS_URL}/${id}/team`)
+        .then(response => response.json())
+
 
 // TODO: delete a player by their ID
 export const deletePlayer = (id) =>
@@ -45,6 +49,7 @@ export const updatePlayer = (id, player) =>
 export default {
     findAllPlayers,
     findPlayerById,
+    findPlayerTeamById,
     deletePlayer,
     createPlayer,
     updatePlayer

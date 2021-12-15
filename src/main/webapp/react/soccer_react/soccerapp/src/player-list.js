@@ -15,18 +15,57 @@ const PlayerList = () => {
     return(
         <div>
             <h2>Player List</h2>
-            <Link to="/players/new">
-                Create New Player
-            </Link>
+
+                <Link to="/players/new">
+                    <button type="button" className="btn btn-success">
+                        Create New Player
+                    </button>
+                </Link>
+
+            <div className="list-group list-group-horizontal">
+                <div className="list-group-item flex-fill">
+                    First Name
+                </div>
+                <div className="list-group-item flex-fill">
+                    Last Name
+                </div>
+                <div className="list-group-item flex-fill">
+                    Username
+                </div>
+                <div className="list-group-item flex-fill">
+                    Email
+                </div>
+                <div className="list-group-item flex-fill">
+                    Position
+                </div>
+            </div>
+
             <ul className="list-group">
                 {players.map(player =>
-                               <li key={player.id}>
+                               <li key={player.id} className="list-group-item">
                                    <Link to={`/players/${player.id}`}>
-                                       {player.firstName},
-                                       {player.lastName},
-                                       {player.username},
-                                       {player.email},
-                                       {player.position}
+
+
+
+
+                                       <div className="list-group list-group-horizontal">
+                                           <div className="list-group-item flex-fill">
+                                               {player.firstName}
+                                           </div>
+                                           <div className="list-group-item flex-fill">
+                                               {player.lastName}
+                                           </div>
+                                           <div className="list-group-item flex-fill">
+                                               {player.username}
+                                           </div>
+
+                                           <div className="list-group-item flex-fill">
+                                               {player.email}
+                                           </div>
+                                           <div className="list-group-item flex-fill">
+                                               {player.position}
+                                           </div>
+                                       </div>
                                    </Link>
                                </li>)
                 }

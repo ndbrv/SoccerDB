@@ -1,19 +1,29 @@
 import React from "react";
-import {Redirect, useParams} from "react-router-dom";
+import {Link, Redirect, useParams} from "react-router-dom";
 import playerService from "./player-service"
 const {useState, useEffect} = React;
 
 const PlayerEditor = () => {
     const {id} = useParams()
     const [player, setPlayer] = useState({})
+    const [team, setTeam] = useState({})
     useEffect(() => {
         if(id !== "new") {
             findPlayerById(id)
+            findPlayerTeamById(id)
         }
     }, []);
     const findPlayerById = (id) =>
         playerService.findPlayerById(id)
-            .then(player => setPlayer(player))
+            .then(player => {
+                setPlayer(player)
+            }
+            )
+    const findPlayerTeamById = (id) =>
+        playerService.findPlayerTeamById(id)
+            .then(team => {
+                setTeam(team)
+            })
 
     const deletePlayer = (id) =>
         playerService.deletePlayer(id)
@@ -24,6 +34,9 @@ const PlayerEditor = () => {
 
     const updatePlayer = (id, newPlayer) =>
         playerService.updatePlayer(id, newPlayer)
+
+
+
 
 
 
@@ -64,6 +77,7 @@ const PlayerEditor = () => {
                     setPlayer(player =>
                                   ({...player, email: e.target.value}))}
                 value={player.email}/>
+            <br/>
             <label>Date of Birth</label>
             <input
                 onChange={(e) =>
@@ -76,7 +90,23 @@ const PlayerEditor = () => {
                     setPlayer(player =>
                                   ({...player, position: e.target.value}))}
                 value={player.position}/>
-            <button>Cancel</button>
+            <br/>
+            <br/>
+            <Link to={"/teams/" + team.id}  >
+                <button className="btn btn-danger">
+                    Team
+                </button>
+            </Link>
+            <br/>
+            <br/>
+
+
+
+            <Link to="/players">
+                <button>
+                    Cancel
+                </button>
+            </Link>
             <button
                 onClick={() => deletePlayer(player.id)}>
                 Delete

@@ -27,6 +27,7 @@ public class UserRestOrmDao {
             @PathVariable("userId") Integer id) {
         return userRepository.findUserById(id);
     }
+
     
     @PutMapping("/api/users/{userId}")
     public User updateUser(

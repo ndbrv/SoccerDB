@@ -1,19 +1,35 @@
 import React from "react";
-import {Redirect, useParams} from "react-router-dom";
+import {Link, Redirect, useParams} from "react-router-dom";
 import teamService, {findTeamById} from "./team-service"
 const {useState, useEffect} = React;
 
 const TeamEditor = () => {
     const {id} = useParams()
     const [team, setTeam] = useState({})
+    const [league, setLeague] = useState({})
+    const [players, setPlayers] = useState({})
+    const [leagueLoading, setLeagueLoading] = useState(true)
+    const [playersLoading, setPlayersLoading] = useState(true)
     useEffect(() => {
         if(id !== "new") {
             findTeamById(id)
+            findTeamLeagueById(id)
+            findTeamPlayersById(id)
         }
     }, []);
     const findTeamById = (id) =>
         teamService.findTeamById(id)
             .then(team => setTeam(team))
+
+    const findTeamLeagueById = (id) =>
+        teamService.findTeamLeagueById(id)
+            .then(league => {setLeague(league)
+            setLeagueLoading(false)})
+
+    const findTeamPlayersById = (id) =>
+        teamService.findTeamPlayersById(id)
+            .then(players => {setPlayers(players)
+            setPlayersLoading(false)})
 
     const deleteTeam = (id) =>
         teamService.deleteTeam(id)
@@ -24,6 +40,29 @@ const TeamEditor = () => {
 
     const updateTeam = (id, newTeam) =>
         teamService.updateTeam(id, newTeam)
+
+    const renderLeague = (league) => {
+        return (
+            <Link to={"/leagues/" + league.id}  >
+                <button className="btn btn-warning">
+                    League
+                </button>
+            </Link>
+        )
+    }
+
+    const renderPlayers = (players) => {
+        return (
+            <ul>
+                {players.map((player) => <li>
+                    <Link to={`/players/${player.id}`}>
+                        {player.firstName},
+                        {player.lastName}
+                    </Link>
+                </li>)}
+            </ul>
+        )
+    }
 
 
     return (
@@ -54,14 +93,23 @@ const TeamEditor = () => {
                     setTeam(team =>
                                 ({...team, teamWorth: e.target.value}))}
                 value={team.teamWorth}/>
-            <label> League ID</label>
-            <input
-                onChange={(e) =>
-                    setTeam(team =>
-                                ({...team, league: e.target.value}))}
-                value={team.league}/>
+            <br>
+            </br>
 
-            <button>Cancel</button>
+            <br/>
+            {leagueLoading ? ' Loading...' : renderLeague(league)}
+            <br/>
+            <br/>
+
+            <label> Players </label>
+            {playersLoading ? ' Loading...' : renderPlayers(players)}
+            <br/>
+
+            <Link to="/teams">
+                <button>
+                    Cancel
+                </button>
+            </Link>
             <button
                 onClick={() => deleteTeam(team.id)}>
                 Delete

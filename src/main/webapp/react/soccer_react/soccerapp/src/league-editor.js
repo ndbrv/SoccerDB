@@ -1,19 +1,29 @@
 import React from "react";
-import {Redirect, useParams} from "react-router-dom";
+import {Link, Redirect, useParams} from "react-router-dom";
 import leagueService from "./league-service"
 const {useState, useEffect} = React;
 
 const LeagueEditor = () => {
     const {id} = useParams()
     const [league, setLeague] = useState({})
+    const [teams, setTeams] = useState({})
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
         if(id !== "new") {
+            findLeagueTeamsById(id)
             findLeagueById(id)
+
         }
     }, []);
     const findLeagueById = (id) =>
         leagueService.findLeagueById(id)
-            .then(team => setLeague(team))
+            .then(league => setLeague(league))
+
+    const findLeagueTeamsById = (id) =>
+        leagueService.findLeagueTeamsById(id)
+            .then(teams => {setTeams(teams)
+            setLoading(false)})
+
 
     const deleteLeague = (id) =>
         leagueService.deleteLeague(id)
@@ -24,6 +34,22 @@ const LeagueEditor = () => {
 
     const updateLeague = (id, newLeague) =>
         leagueService.updateLeague(id, newLeague)
+
+
+    const renderTeams = (teams) => {
+        return (
+            <ul>
+                {teams.map((team) => <li>
+                    <Link to={`/teams/${team.id}`}>
+                        {team.teamName}
+                    </Link>
+                </li>)}
+            </ul>
+        )
+    }
+
+    console.log(league)
+    console.log(teams)
 
 
     return (
@@ -54,9 +80,18 @@ const LeagueEditor = () => {
                     setLeague(league =>
                                 ({...league, leagueWorth: e.target.value}))}
                 value={league.leagueWorth}/>
+            <br/>
+            <br/>
+            <label> Teams </label>
+            {loading ? 'Loading' : renderTeams(teams)}
+            <br/>
 
 
-            <button>Cancel</button>
+            <Link to="/leagues">
+                <button>
+                    Cancel
+                </button>
+            </Link>
             <button
                 onClick={() => deleteLeague(league.id)}>
                 Delete

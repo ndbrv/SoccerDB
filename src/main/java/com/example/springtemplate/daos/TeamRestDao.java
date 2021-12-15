@@ -34,6 +34,18 @@ public class TeamRestDao {
     return teamRepository.findTeamById(id);
   }
 
+  @GetMapping("/api/teams/{teamId}/league")
+  public League findTeamLeagueById(
+          @PathVariable("teamId") Integer id) {
+    return teamRepository.findTeamById(id).getLeague();
+  }
+
+  @GetMapping("/api/teams/{teamId}/players")
+  public List<Player> findTeamPlayersById(
+          @PathVariable("teamId") Integer id) {
+    return teamRepository.findTeamById(id).getPlayers();
+  }
+
   @PutMapping("/api/teams/{teamId}")
   public Team updateLeague(
           @PathVariable("teamId") Integer id,

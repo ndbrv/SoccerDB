@@ -13,17 +13,30 @@ function App() {
   return (
     <div className="App">
         <BrowserRouter>
-            <Link to="/players">
-               Player List
-            </Link>
+                <Link to="/players">
+                    <button type="button" className="btn btn-success">
+                    Player List
+                    </button>
+                </Link>
+
+                <Link to="/teams">
+                    <button type="button" className="btn btn-danger">
+                    Team List
+                    </button>
+                </Link>
+
+
+                <Link to="/leagues">
+                    <button type="button" className="btn btn-warning">
+                    League List
+                    </button>
+                </Link>
+
+
             <br/>
-            <Link to="/teams">
-                Team List
-            </Link>
+
             <br/>
-            <Link to="/leagues">
-                League List
-            </Link>
+
             <Routes>
                 <Route path="/players" element={<PlayerList/>}/>
                 <Route path="/players/:id" element={<PlayerEditor/>}/>

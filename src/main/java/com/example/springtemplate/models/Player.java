@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -35,7 +36,6 @@ public class Player {
   private Position position;
 
   @ManyToOne
-  @JsonIgnore
   private Team team;
 
   //getters and setters

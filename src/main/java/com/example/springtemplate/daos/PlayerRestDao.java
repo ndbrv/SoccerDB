@@ -1,6 +1,7 @@
 package com.example.springtemplate.daos;
 
 import com.example.springtemplate.models.Player;
+import com.example.springtemplate.models.Team;
 import com.example.springtemplate.models.User;
 import com.example.springtemplate.repositories.PlayerRepository;
 import com.example.springtemplate.repositories.UserRestRepository;
@@ -28,6 +29,12 @@ public class PlayerRestDao {
   public Player findPlayerById(
           @PathVariable("playerId") Integer id) {
     return playerRepository.findPlayerById(id);
+  }
+
+  @GetMapping("/api/players/{playerId}/team")
+  public Team findPlayerTeamById(
+          @PathVariable("playerId") Integer id) {
+    return playerRepository.findPlayerById(id).getTeam();
   }
 
   @PutMapping("/api/players/{playerId}")

@@ -13,6 +13,14 @@ export const findTeamById = (id) =>
     fetch(`${TEAMS_URL}/${id}`)
         .then(response => response.json())
 
+export const findTeamLeagueById = (id) =>
+    fetch(`${TEAMS_URL}/${id}/league`)
+        .then(response => response.json())
+
+export const findTeamPlayersById = (id) =>
+    fetch(`${TEAMS_URL}/${id}/players`)
+        .then(response => response.json())
+
 
 // TODO: delete a team by their ID
 export const deleteTeam = (id) =>
@@ -45,6 +53,8 @@ export const updateTeam = (id, team) =>
 export default {
     findAllTeams,
     findTeamById,
+    findTeamLeagueById,
+    findTeamPlayersById,
     deleteTeam,
     createTeam,
     updateTeam

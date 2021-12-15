@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -28,13 +29,14 @@ public class Team {
   @Column(name="team_worth")
   private Integer teamWorth;
 
-  @ManyToOne
-  @JsonIgnore
-  private League league;
-
   @OneToMany(mappedBy = "team")
   @JsonIgnore
   private List<Player> players;
+
+  @ManyToOne
+  private League league;
+
+
 
   //getters and setters
   public Integer getID() {
