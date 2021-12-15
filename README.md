@@ -2,6 +2,7 @@
 
 SoccerDB Project 
 Group 51
+SEC04
 Nikola Dobrev
 
 Final project for CS3200 Database Design. Web app that allows for navigation of and CRUD operations on soccer players, teams, and leagues.
