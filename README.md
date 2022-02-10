@@ -1,4 +1,4 @@
-# CS3200FinalProjCode
+# SoccerDB
 
 SoccerDB Project 
 Group 51
